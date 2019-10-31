@@ -30,7 +30,7 @@ app.post('/signup', (req, res, next) => {
     }).catch(next);
 })
 
-app.post('/signin', authMiddleware, (req, res) => {
+app.post('/signin', authMiddleware(), (req, res) => {
   res.cookie('auth', req.token);
   res.send(req.token);
 })
@@ -39,7 +39,7 @@ app.get('/unprotected', (req, res) => {
   res.send('You are unprotected');
 });
 
-app.get('/protected', authMiddleware, (req, res) => {
+app.get('/protected', authMiddleware(), (req, res) => {
   res.send('You have a valid token!');
 });
 
