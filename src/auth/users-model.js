@@ -47,9 +47,9 @@ users.statics.authenticateBasic = function(auth) {
 
 //Authenicate Token
 users.statics.authenticateToken = function(token) {
-    let parsedToken = jwt.verify(token, SECRET);
-    let query = {_id: parsedToken.id};
-    return this.findOne(query);
+  let parsedToken = jwt.verify(token, SECRET);
+  let query = {_id: parsedToken.id};
+  return this.findOne(query);
 };
 
 
@@ -60,12 +60,12 @@ users.methods.comparePassword = function(password) {
 
 users.methods.can = function(capability) {
   return true;
-}
+};
 
 users.methods.generateToken = function(type) {
 
   let verifyOptions = {
-    expiresIn: 900
+    expiresIn: 900,
   };
 
   let token = {
