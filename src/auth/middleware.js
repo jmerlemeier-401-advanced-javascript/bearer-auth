@@ -8,7 +8,7 @@ module.exports = (capability) => {
 
     try {
       let [authType, authString] = req.headers.authorization.split(/\s+/);
-      console.log(authType, authString);
+
       switch (authType.toLowerCase()) {
         case 'basic':
           return _authBasic(authString);
@@ -37,7 +37,9 @@ module.exports = (capability) => {
     function _authBearer(authString) {
       return User.authenticateToken(authString)
         .then(user => _authenticate(user))
-        .catch(_authError);
+        .catch(() => {
+          _authError();
+        });
     }
 
     function _authenticate(user) {
@@ -52,6 +54,7 @@ module.exports = (capability) => {
     }
 
     function _authError() {
+      console.log('here');
       next('Invalid User ID/Password');
     }
 

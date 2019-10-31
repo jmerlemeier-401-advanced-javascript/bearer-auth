@@ -58,6 +58,10 @@ users.methods.comparePassword = function(password) {
     .then( valid => valid ? this : null);
 };
 
+users.methods.can = function(capability) {
+  return true;
+}
+
 users.methods.generateToken = function(type) {
 
   let verifyOptions = {
